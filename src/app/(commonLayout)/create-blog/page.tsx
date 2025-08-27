@@ -1,12 +1,12 @@
 import { Container } from '@mui/material';
 import React from 'react';
 
-const Blogs = () => {
+const CreateBlog = () => {
     return (
-        <Container maxWidth="xl">
-            Blogs
+         <Container maxWidth="xl">
+            Creae Blog
         </Container>
     );
 };
 
-export default Blogs;
+export default CreateBlog;

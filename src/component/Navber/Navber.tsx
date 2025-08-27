@@ -3,125 +3,87 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import Link from 'next/link';
-
-const pages = ['Products', 'Pricing', 'Blog'];
+import { Drawer } from '@mui/material';
 
 const Navber = () => {
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+    const [open, setOpen] = React.useState(false);
 
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
+    const toggleDrawer = (newOpen: boolean) => () => {
+        setOpen(newOpen);
     };
 
     return (
-        <AppBar position="static"
-            sx={{
-                // boxShadow: 0,
-                // bgcolor: "transparent",
-                // backgroundImage: "none",
-                // mt: 2,
-            }}>
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="#app-bar-with-responsive-menu"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        Blogger
-                    </Typography>
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
-                        >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href="#app-bar-with-responsive-menu"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        Blogger
-                    </Typography>
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <MenuItem>
-                            <Link href="/blogs">
-                                <Typography variant="body2" color="primary">
-                                    Gallery
-                                </Typography>
+        <Container maxWidth="xl">
+            <AppBar position="static" sx={{ borderRadius: '3px' }}>
+                <Container maxWidth="xl">
+                    <Toolbar disableGutters variant="regular" >
+                        {/* <Toolbar disableGutters> */}
+                        <Box sx={{ flexGrow: 1, display: 'flex', alignItems: "center", }}>
+                            <Link href="/" style={{ textDecoration: 'none', color: 'white', marginRight: "20px" }}>
+                                <Typography style={{ fontWeight: '700' }}>BLOGGER</Typography>
                             </Link>
-                        </MenuItem>
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar>
+                            <Box sx={{ display: { xs: "none", md: "flex", gap: '10px' } }}>
+                                <MenuItem sx={{ py: "4px", px: "12px", borderRadius: "5px" }}
+                                >
+                                    <Link href="/blogs" style={{ textDecoration: 'none', color: 'white' }}>
+                                        <Typography>
+                                            Blogs
+                                        </Typography>
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem sx={{ py: "4px", px: "12px", borderRadius: "5px" }}
+                                >
+                                    <Link href="/create-blog" style={{ textDecoration: 'none', color: 'white' }}>
+                                        <Typography>
+                                            Create Blog
+                                        </Typography>
+                                    </Link>
+                                </MenuItem>
+                            </Box>
+                        </Box>
+
+                        <Box sx={{ display: { md: "none" } }}>
+                            <Button variant="text" color="inherit" aria-label="menu" onClick={toggleDrawer(true)} sx={{ minWidth: "30px", p: "4px" }} >
+                                <MenuIcon />
+                            </Button>
+                            <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+                                <Box sx={{ minWidth: '40vw' }}>
+                                    <MenuItem>
+                                        <Button
+                                            color="primary"
+                                            variant="outlined"
+                                            component="a"
+                                            href="/blogs"
+                                            sx={{ width: "100%" }}
+                                        >
+                                            Blogs
+                                        </Button>
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <Button
+                                            color="primary"
+                                            variant="outlined"
+                                            component="a"
+                                            href="/blogs"
+                                            sx={{ width: "100%" }}
+                                        >
+                                            Create Blog
+                                        </Button>
+                                    </MenuItem>
+                                </Box>
+                            </Drawer>
+                        </Box>
+
+                    </Toolbar>
+                </Container>
+            </AppBar>
+        </Container>
     );
 };
 

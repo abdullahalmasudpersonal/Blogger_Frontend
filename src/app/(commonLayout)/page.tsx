@@ -1,10 +1,11 @@
+import { Container } from '@mui/material';
 import React from 'react';
 
 const HomePage = () => {
     return (
-        <div>
+        <Container maxWidth="xl">
             Home page
-        </div>
+        </Container>
     );
 };
 
