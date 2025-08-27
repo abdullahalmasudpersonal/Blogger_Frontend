@@ -1,23 +1,19 @@
 "use client";
 import { Container } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Blog } from '../../page';
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 
-type TParams = {
-    params: {
-        id: string;
-    };
-};
 
-const SingleBlog = ({ params }: TParams) => {
+
+const SingleBlog = ({ params }: { params: Promise<{ id: string }> }) => {
     const [singleBlog, setSingleBlog] = useState<Blog | null>(null);
-    const targetId = params.id;
+    const { id:blogId } = use(params);
 
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const res = await fetch(`https://blogger-backend-five.vercel.app/api/blog/single-blog/${targetId}`);
+                const res = await fetch(`https://blogger-backend-five.vercel.app/api/blog/single-blog/${blogId}`);
                 const data = await res.json();
                 setSingleBlog(data?.data);
             } catch (error) {
@@ -26,7 +22,7 @@ const SingleBlog = ({ params }: TParams) => {
         };
 
         fetchBlogs();
-    }, [targetId]);
+    }, [blogId]);
 
     return (
         <Container maxWidth="md" sx={{ mt: 4 }}>
