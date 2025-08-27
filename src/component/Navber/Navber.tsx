@@ -19,7 +19,7 @@ const Navber = () => {
     };
 
     return (
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx={{marginBottom:'50px'}}>
             <AppBar position="static" sx={{ borderRadius: '3px' }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters variant="regular" >
@@ -29,14 +29,14 @@ const Navber = () => {
                                 <Typography style={{ fontWeight: '700' }}>BLOGGER</Typography>
                             </Link>
                             <Box sx={{ display: { xs: "none", md: "flex", gap: '10px' } }}>
-                                <MenuItem sx={{ py: "4px", px: "12px", borderRadius: "5px" }}
+                                {/* <MenuItem sx={{ py: "4px", px: "12px", borderRadius: "5px" }}
                                 >
                                     <Link href="/blogs" style={{ textDecoration: 'none', color: 'white' }}>
                                         <Typography>
                                             Blogs
                                         </Typography>
                                     </Link>
-                                </MenuItem>
+                                </MenuItem> */}
                                 <MenuItem sx={{ py: "4px", px: "12px", borderRadius: "5px" }}
                                 >
                                     <Link href="/create-blog" style={{ textDecoration: 'none', color: 'white' }}>
@@ -54,7 +54,7 @@ const Navber = () => {
                             </Button>
                             <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
                                 <Box sx={{ minWidth: '40vw' }}>
-                                    <MenuItem>
+                                    {/* <MenuItem>
                                         <Button
                                             color="primary"
                                             variant="outlined"
@@ -64,7 +64,7 @@ const Navber = () => {
                                         >
                                             Blogs
                                         </Button>
-                                    </MenuItem>
+                                    </MenuItem> */}
                                     <MenuItem>
                                         <Button
                                             color="primary"
